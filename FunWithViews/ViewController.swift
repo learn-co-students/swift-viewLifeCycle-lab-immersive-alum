@@ -54,7 +54,35 @@ class ViewController: UIViewController {
     
     @IBAction func dieButtonTapped(_ sender: AnyObject) {
         currentRoll = currentRoll + 1
-
+        let num = rollDice()
+        switch currentRoll {
+        case 1:
+            dieRollOne.isHidden = false
+            dieRollOneLabel.text = String(num)
+        case 2:
+            dieRollTwo.isHidden = false
+            dieRollTwoLabel.text = String(num)
+        case 3:
+            dieRollThree.isHidden = false
+            dieRollThreeLabel.text = String(num)
+        case 4:
+            dieRollFour.isHidden = false
+            dieRollFourLabel.text = String(num)
+        case 5:
+            dieRollFive.isHidden = false
+            dieRollFiveLabel.text = String(num)
+        case 6:
+            dieRollSix.isHidden = false
+            dieRollSixLabel.text = String(num)
+        default:
+            resetLabels()
+            resetDice()
+            currentRoll = 0
+        }
+    }
+    
+    func resetDice() {
+        print("reset dice called")
         topLeftDie.isHidden = true
         topRightDie.isHidden = true
         middleLeftDie.isHidden = true
@@ -62,6 +90,21 @@ class ViewController: UIViewController {
         middleRightDie.isHidden = true
         bottomLeftDie.isHidden = true
         bottomRightDie.isHidden = true
+    }
+    
+    func resetLabels() {
+        print("Reset labels called")
+        dieRollOne.isHidden = true
+        dieRollTwo.isHidden = true
+        dieRollThree.isHidden = true
+        dieRollFour.isHidden = true
+        dieRollFive.isHidden = true
+        dieRollSix.isHidden = true
+    }
+    
+    func rollDice() -> Int {
+        resetDice()
+        print("Roll called")
         let num = randomDiceRoll()
         switch num {
         case 1:
@@ -94,42 +137,7 @@ class ViewController: UIViewController {
         default:
             break
         }
-        switch currentRoll {
-        case 1:
-            dieRollOne.isHidden = false
-            dieRollOneLabel.text = String(num)
-            
-        case 2:
-            dieRollTwo.isHidden = false
-            dieRollTwoLabel.text = String(num)
-        case 3:
-            dieRollThree.isHidden = false
-            dieRollThreeLabel.text = String(num)
-        case 4:
-            dieRollFour.isHidden = false
-            dieRollFourLabel.text = String(num)
-        case 5:
-            dieRollFive.isHidden = false
-            dieRollFiveLabel.text = String(num)
-        case 6:
-            dieRollSix.isHidden = false
-            dieRollSixLabel.text = String(num)
-        default:
-            dieRollOne.isHidden = true
-            dieRollTwo.isHidden = true
-            dieRollThree.isHidden = true
-            dieRollFour.isHidden = true
-            dieRollFive.isHidden = true
-            dieRollSix.isHidden = true
-            topLeftDie.isHidden = true
-            topRightDie.isHidden = true
-            middleLeftDie.isHidden = true
-            middleDie.isHidden = true
-            middleRightDie.isHidden = true
-            bottomLeftDie.isHidden = true
-            bottomRightDie.isHidden = true
-            currentRoll = 0
-        }
+        return num
     }
     
     // Returns back a random Int (1, 2, 3, 4, 5, or 6)
